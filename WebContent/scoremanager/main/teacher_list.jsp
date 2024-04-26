@@ -10,11 +10,6 @@
 				<thead>
 					<tr>
 						<th>氏名</th>
-						<th>学校コード</th>
-						<th></th>
-						<!-- 変更と削除のための空の列を追加 -->
-						<th></th>
-						<!-- 変更と削除のための空の列を追加 -->
 					</tr>
 				</thead>
 				<tbody>
@@ -23,7 +18,7 @@
 							<c:forEach var="teacher" items="${teachers}">
 								<tr>
 									<td><c:if test="${not empty teacher.name}">${teacher.name}</c:if></td>
-									<td><c:if test="${not empty teacher.id}">${teacher.id}</c:if></td>
+
 								</tr>
 							</c:forEach>
 						</c:when>
