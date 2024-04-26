@@ -43,6 +43,7 @@ public class TestRegistAction extends Action {
         	subject.setCd(subjectStr);
         	subjectName = new SubjectDao().get(subject.getCd(), school).getName();
         }
+
         SubjectDao subjectDao = new SubjectDao();
         TestDao testDao = new TestDao();
         ClassNumDao cNumDao = new ClassNumDao();

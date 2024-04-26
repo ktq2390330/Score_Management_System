@@ -52,7 +52,6 @@ public class TestRegistExecuteAction extends Action {
 
         new TestDao().save(tests);
 
-        // 処理完了を通知するページにフォワード
         req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
 	}
 }

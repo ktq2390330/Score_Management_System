@@ -91,10 +91,10 @@
 
         if (point === "") {
             errorMessageElement.innerText = "点数を入力してください。";
-            errorMessageElement.style.color = "black"; // エラーメッセージの色を赤に設定
+            errorMessageElement.style.color = "black";
             return false;
         } else {
-            errorMessageElement.innerText = ""; // エラーメッセージをクリア
+            errorMessageElement.innerText = "";
             return true;
         }
     }
