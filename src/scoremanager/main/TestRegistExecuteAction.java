@@ -1,3 +1,4 @@
+
 package scoremanager.main;
 
 import java.util.ArrayList;
@@ -55,3 +56,4 @@ public class TestRegistExecuteAction extends Action {
         req.getRequestDispatcher("student_update_done.jsp").forward(req, res);
 	}
 }
+

@@ -10,7 +10,7 @@ import java.util.List;
 import bean.School;
 import bean.Student;
 public class StudentDao extends Dao {
-	private String baseSql = "select * from student where school_cd=?";
+	private String baseSql = "select * from student where school_cd=? ";
 //	select * from student where school_cd=? and deleted=false
 	public Student get(String no) throws Exception {
 	    Student student = new Student();
@@ -98,8 +98,8 @@ public class StudentDao extends Dao {
 	    Connection connection = getConnection();
 	    PreparedStatement statement = null;
 	    ResultSet rSet = null;
-	    String condition = "and ent_year = ? and class_num = ?";
-	    String order = "order by no asc";
+	    String condition = "and ent_year = ? and class_num = ? ";
+	    String order = " order by no asc";
 
 	    String conditionIsAttend = "";
 	    if (isAttend) {
@@ -292,7 +292,7 @@ public class StudentDao extends Dao {
         int count=0;
 
         try {
-            statement=connection.prepareStatement("update student set deleted=true where student_no=?");
+            statement=connection.prepareStatement("update student set deleted=true where no =?");
             statement.setString(1, studentNo);
 
             count=statement.executeUpdate();
