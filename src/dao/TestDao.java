@@ -149,44 +149,17 @@ public class TestDao extends Dao{
 
 	public boolean save(List<Test> list) throws Exception {
     	Connection connection = getConnection();
-    	PreparedStatement statement = null;
     	int count = 0;
 
     	try {
-    		for (Test t:list){
-	    		Test old = get(t.getStudent(),t.getSubject(),t.getSchool(),t.getNo());
-	    		if (old == null) {
-	    			statement = connection.prepareStatement(
-	    					"insert into test(student_no, subject_cd, school_cd, no, point, class_num) values (?, ?, ?, ?, ?, ?)");
-	    			statement.setString(1,  t.getStudent().getNo());
-	    			statement.setString(2, t.getSubject().getCd());
-	    			statement.setString(3,  t.getSchool().getCd());
-	    			statement.setInt(4,  t.getNo());
-	    			statement.setInt(5,  t.getPoint());
-	    			statement.setString(6, t.getClassNum());
-	    		} else {
-	    			statement = connection.prepareStatement(
-	    					"update test set point=? where class_num=? and student_no=? and subject_cd=?");
-	    			statement.setInt(1,  t.getPoint());
-	    			statement.setString(2,  t.getClassNum());
-	    			statement.setString(3,  t.getStudent().getNo());
-	    			statement.setString(4, t.getSubject().getCd());
-	    		}
-
-	    		count = statement.executeUpdate();
+    		for (Test test:list){
+	    	boolean flg=save(test,connection);
+	    	if(flg){count++;}
     		}
     	} catch (Exception e) {
             throw e;
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException sqle) {
-                    throw sqle;
-                }
-            }
-            // コネクションのクローズも行う
-            if (connection != null) {
+        }finally{
+        	if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException sqle) {
@@ -195,29 +168,83 @@ public class TestDao extends Dao{
             }
         }
 
-        if (count == list.size()) {
-            return true;
-        } else {
-            return false;
-        }
+    	return count == list.size();
     }
+
+	public boolean save(Test test,Connection connection)throws Exception{
+		boolean flg=false;
+		PreparedStatement statement = null;
+
+		try{
+		Test old = get(test.getStudent(),test.getSubject(),test.getSchool(),test.getNo());
+		if (old == null) {
+			statement = connection.prepareStatement(
+					"insert into test(student_no, subject_cd, school_cd, no, point, class_num) values (?, ?, ?, ?, ?, ?)");
+			statement.setString(1,  test.getStudent().getNo());
+			statement.setString(2, test.getSubject().getCd());
+			statement.setString(3,  test.getSchool().getCd());
+			statement.setInt(4,  test.getNo());
+			statement.setInt(5,  test.getPoint());
+			statement.setString(6, test.getClassNum());
+		} else {
+			statement = connection.prepareStatement(
+					"update test set point=? where class_num=? and student_no=? and subject_cd=?");
+			statement.setInt(1,  test.getPoint());
+			statement.setString(2,  test.getClassNum());
+			statement.setString(3,  test.getStudent().getNo());
+			statement.setString(4, test.getSubject().getCd());
+		}
+		statement.executeUpdate();
+		}catch(Exception e){
+			throw e;
+		}finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            }
+        }
+
+		return flg;
+	}
 
     public boolean delete(List<Test> list) throws Exception {
         Connection connection = getConnection();
-        PreparedStatement statement = null;
         int count = 0;
 
-        try {
-        	for(Test t:list){
-	            statement = connection.prepareStatement("delete from test where student_no=? and subject_no=?");
-	            statement.setString(1, t.getStudent().getNo());
-	            statement.setString(2, t.getSubject().getCd());
-
-	            count = statement.executeUpdate();
+        try{for(Test test:list){
+	            boolean flg=delete(test,connection);
+	            if(flg){count++;}
+	            }
+        }catch(Exception e){
+        	throw e;
+        }finally{
+        	if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException sqle) {
+	                throw sqle;
+	            }
         	}
-        } catch (Exception e) {
-            throw e;
-        } finally {
+        }
+
+        return count == list.size();
+    }
+
+    public boolean delete(Test test,Connection connection)throws Exception{
+    	boolean flg=false;
+    	PreparedStatement statement = null;
+    	int count = 0;
+    	try{
+    	statement = connection.prepareStatement("delete from test where student_no=? and subject_no=?");
+        statement.setString(1, test.getStudent().getNo());
+        statement.setString(2, test.getSubject().getCd());
+        count=statement.executeUpdate();
+    	}catch(Exception e){
+    		throw e;
+    	}finally {
             if (statement != null) {
                 try {
                     statement.close();
@@ -225,15 +252,8 @@ public class TestDao extends Dao{
                     throw sqle;
                 }
             }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException sqle) {
-                    throw sqle;
-                }
-            }
         }
-
-        return count == list.size();
+    	if(count>0){flg=true;}
+    	return flg;
     }
 }
