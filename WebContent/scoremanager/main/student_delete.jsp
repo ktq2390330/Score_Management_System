@@ -31,16 +31,6 @@
     <p class="form-control-static" id="classnum">&nbsp;&nbsp;&nbsp;&nbsp;${student.classNum}</p>
 </div>
 
-				<div class="form-group form-check">
-					<input type="checkbox" class="form-check-input" id="isattend"
-						name="isattend" value="true"> <label
-						class="form-check-label" for="isattend">削除</label>
-				</div>
-
-				<div id="deleteConfirmation" style="display: none;">
-					本当に削除しますか？
-					<button onclick="confirmDelete()">はい</button>
-				</div>
 				<input type="hidden" name="no" value="${param.no}" />
 				<button type="submit" class="btn btn-danger">削除</button>
 			</form>
@@ -50,24 +40,3 @@
 		</section>
 	</c:param>
 </c:import>
-<script>
-	// チェックボックスの状態が変更されたときに呼び出される関数
-	document.getElementById('isattend').addEventListener('change', function() {
-		var deleteConfirmation = document.getElementById('deleteConfirmation');
-
-		// チェックボックスがチェックされているかどうかを確認
-		if (this.checked) {
-			// チェックされていれば確認メッセージを表示
-			deleteConfirmation.style.display = 'block';
-		} else {
-			// チェックが外れていれば確認メッセージを非表示
-			deleteConfirmation.style.display = 'none';
-		}
-	});
-
-	// 削除確認のボタンがクリックされたときの処理
-	function confirmDelete() {
-		// ここに削除の実行処理を記述
-		alert('削除しました'); // 例: 削除処理が成功した場合のアラート表示など
-	}
-</script>
