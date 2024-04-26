@@ -18,11 +18,11 @@
     <c:choose>
         <c:when test="${not empty sessionScope.user}">
             <!-- ログインしている場合はメニューに遷移 -->
-            <meta http-equiv="refresh" content="1;url=main/Menu.action">
+            <meta http-equiv="refresh" content="1;url=scoremanager/main/Menu.action">
         </c:when>
         <c:otherwise>
             <!-- ログインしていない場合はログインページに遷移 -->
-            <meta http-equiv="refresh" content="1;url=Login.action">
+            <meta http-equiv="refresh" content="1;url=scoremanager/Login.action">
         </c:otherwise>
     </c:choose>
 
