@@ -9,7 +9,7 @@
 			<h2 class="h2 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
 			<p class="p mb-3 fw-normal text-center" style="background-color: rgba(50, 150, 100, 0.6); padding: 4px;">登録が完了しました</p>
 			<br><br><br><br><br>
-			<a href="StudentCreate.action">戻る</a>
+			<a href="TestPregist.action">戻る</a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href = "TestList.action">成績参照</a>
