@@ -18,6 +18,6 @@
 </c:import>
 <style>
 	.link-margin {
-	margin-right: 40px; /* 右側に20pxの余白を追加 */
+	margin-right: 80px; /* 右側に60pxの余白を追加 */
 	}
 </style>
