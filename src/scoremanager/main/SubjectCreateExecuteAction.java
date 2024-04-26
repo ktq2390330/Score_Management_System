@@ -23,8 +23,10 @@ public class SubjectCreateExecuteAction extends Action {
 		// 文字数が3でない場合はエラーメッセージを設定して科目登録ページにフォワード
 		if (cd.length() != 3) {
 			request.setAttribute("errorMessage", "科目コードは3文字で入力してください");
-			request.getRequestDispatcher("subject_create.jsp").forward(request, response);
-			return;
+			request.setAttribute("cd", cd); // 入力された科目コードをリクエスト属性に設定
+	        request.setAttribute("name", name); // 入力された科目名をリクエスト属性に設定
+	        request.getRequestDispatcher("subject_create.jsp").forward(request, response);
+	        return;
 		}
 
 		// 科目コードの重複をチェック
@@ -34,6 +36,8 @@ public class SubjectCreateExecuteAction extends Action {
         if (cdExists) {
             // 重複がある場合はエラーメッセージを設定して科目登録ページにフォワード
             request.setAttribute("errorMessage", "科目コードが重複しています");
+            request.setAttribute("cd", cd); // 入力された科目コードをリクエスト属性に設定
+            request.setAttribute("name", name); // 入力された科目名をリクエスト属性に設定
             request.getRequestDispatcher("subject_create.jsp").forward(request, response);
             return;
         }

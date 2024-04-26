@@ -11,7 +11,7 @@
 
 				<label for="cd">科目コード</label> <input type="text"
 					class="form-control" id="cd" name="cd" placeholder="科目コードを入力してください"
-					required>
+					value="${not empty cd ? cd : ''}" required>
 				<div class="mt-2" style="color: orange;">
 					<c:if test="${not empty errorMessage}">
                         ${errorMessage}
@@ -19,7 +19,8 @@
 				</div>
 				<br> <label for="name">科目名</label> <input type="text"
 					class="form-control" id="name" name="name"
-					placeholder="科目名を入力してください" required> <br>
+					placeholder="科目名を入力してください" value="${not empty name ? name : ''}"
+					required> <br>
 				<button type="submit" class="btn btn-primary">登録</button>
 			</form>
 			<br> <a href="SubjectList.action">戻る</a>
