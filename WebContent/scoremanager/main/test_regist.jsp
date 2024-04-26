@@ -28,11 +28,11 @@
                     </div>
                     <div class="col-4">
     					<label class="form-label" for="student-f3-select">科目</label>
-    					<select class="form-select" id="student-f3-select" name="f3">
-    					    <option value="0">--------</option>
-    					    <c:forEach var="subject" items="${subject_cdset}" varStatus="loop">
-    					        <option value="${subject}" <c:if test="${subject==f3}">selected</c:if>>${subject_nameset[loop.index]}</option>
-    					    </c:forEach>
+    						<select class="form-select" id="student-f3-select" name="f3">
+        					<option value="0">--------</option>
+        					<c:forEach var="subject" items="${subject_cdset}" varStatus="loop">
+            					<option value="${subject}" <c:if test="${subject==f3}">selected</c:if>>${subject_nameset[loop.index]}</option>
+        					</c:forEach>
     					</select>
 					</div>
 
@@ -52,8 +52,8 @@
             </form>
 
             <c:if test="${not empty tests}">
-                <div>科目:${subject_Name}(${f4}回)</div>
-                <form action="TestRegistExecute.action" method="post">
+                <div>科目:${subject_name2}(${f4}回)</div>
+                <form action="TestRegistExecute.action" method="post" onsubmit="return validateForm()">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -71,7 +71,8 @@
                                     <td>${test.classNum}<input type="hidden" name="classNum" value="${test.classNum}"></td>
                                     <td>${test.student.no}<input type="hidden" name="student.no" value="${test.student.no}"></td>
                                     <td>${test.student.name}<input type="hidden" name="subject.cd" value="${test.subject.cd}"></td>
-                                    <td><input type="text" name="point" value="${test.point}"></td>
+                                    <td><input type="text" name="point" value="${test.point}">
+                                    <div id="errorMessage" style="color: orange;"></div></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -82,3 +83,19 @@
         </section>
     </c:param>
 </c:import>
+
+<script>
+    function validateForm() {
+        var point = document.getElementById("point").value.trim();
+        var errorMessageElement = document.getElementById("errorMessage");
+
+        if (point === "") {
+            errorMessageElement.innerText = "点数を入力してください。";
+            errorMessageElement.style.color = "black";
+            return false;
+        } else {
+            errorMessageElement.innerText = "";
+            return true;
+        }
+    }
+</script>
