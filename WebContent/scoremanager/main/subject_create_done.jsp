@@ -10,8 +10,8 @@
 			<br>
 			<p class="h2 fw-normal bg-opacity-10 py-2 px-4 mb-0"
 				style="text-align: center; background-color: lightgreen; font-size: small;">登録が完了しました</p>
-			<br> <a href="SubjectCreate.action">戻る</a> <a
-				href="SubjectList.action">科目一覧</a>
+			<br><br><br><br>
+			<a href="SubjectCreate.action">戻る</a>　　　　　<a href="SubjectList.action">科目一覧</a>
 		</section>
 	</c:param>
 </c:import>

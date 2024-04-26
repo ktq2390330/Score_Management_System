@@ -137,7 +137,7 @@ public class SubjectDao extends Dao{
     			statement.setString(3, subject.getName());
     		} else {
     			statement = connection.prepareStatement(
-    					"update subject name=? where cd=?");
+    					"update subject SET name=? where cd=?");
     			statement.setString(1, subject.getName());
     			statement.setString(2,subject.getCd());
     		}
@@ -198,5 +198,37 @@ public class SubjectDao extends Dao{
         }
 
         return count > 0;
+	}
+
+	public boolean exists(String cd, School school) throws Exception {
+	    Connection connection = getConnection();
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+	    boolean exists = false;
+
+	    try {
+	        statement = connection.prepareStatement("SELECT COUNT(*) FROM subject WHERE cd = ? AND school_cd = ?");
+	        statement.setString(1, cd);
+	        statement.setString(2, school.getCd());
+	        resultSet = statement.executeQuery();
+	        if (resultSet.next()) {
+	            int count = resultSet.getInt(1);
+	            exists = (count > 0);
+	        }
+	    } catch (SQLException e) {
+	        throw e;
+	    } finally {
+	        if (resultSet != null) {
+	            resultSet.close();
+	        }
+	        if (statement != null) {
+	            statement.close();
+	        }
+	        if (connection != null) {
+	            connection.close();
+	        }
+	    }
+
+	    return exists;
 	}
 }
