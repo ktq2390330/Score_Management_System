@@ -31,13 +31,6 @@
     <p class="form-control-static" id="classnum">&nbsp;&nbsp;&nbsp;&nbsp;${student.classNum}</p>
 </div>
 
-				<div class="form-group form-check">
-					<input type="checkbox" class="form-check-input" id="isattend"
-						name="isattend" value="true"> <label
-						class="form-check-label" for="isattend">削除</label>
-				</div>
-
-
 				<input type="hidden" name="no" value="${param.no}" />
 				<button type="submit" class="btn btn-danger">削除</button>
 			</form>
