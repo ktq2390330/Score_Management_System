@@ -37,10 +37,7 @@
 						class="form-check-label" for="isattend">削除</label>
 				</div>
 
-				<div id="deleteConfirmation" style="display: none;">
-					本当に削除しますか？
-					<button onclick="confirmDelete()">はい</button>
-				</div>
+
 				<input type="hidden" name="no" value="${param.no}" />
 				<button type="submit" class="btn btn-danger">削除</button>
 			</form>
