@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import bean.Test;
@@ -20,6 +21,9 @@ public class TestRegistAction extends Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("user");
+        String schoolCd = teacher.getSchoolCdAsString();
+        School school = new School();
+        school.setCd(schoolCd);
 
         String entYearStr = request.getParameter("f1");
         String classNum = request.getParameter("f2");
@@ -27,6 +31,7 @@ public class TestRegistAction extends Action {
         String numStr = request.getParameter("f4");
         int entYear = 0;
         int num = 0;
+        String subjectName = null;
         Subject subject = new Subject();
         if (entYearStr != null && !entYearStr.isEmpty()) {
             entYear = Integer.parseInt(entYearStr);
@@ -36,6 +41,7 @@ public class TestRegistAction extends Action {
         }
         if (subjectStr != null) {
         	subject.setCd(subjectStr);
+        	subjectName = new SubjectDao().get(subject.getCd(), school).getName();
         }
         SubjectDao subjectDao = new SubjectDao();
         TestDao testDao = new TestDao();
@@ -65,6 +71,7 @@ public class TestRegistAction extends Action {
         request.setAttribute("ent_year_set", entYearSet);
         request.setAttribute("subject_cdset", subject_cdSet);
         request.setAttribute("subject_nameset", subject_nameSet);
+        request.setAttribute("subject_name2", subjectName);
 
         request.getRequestDispatcher("test_regist.jsp").forward(request, response);
     }
