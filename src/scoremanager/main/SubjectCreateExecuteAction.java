@@ -27,13 +27,23 @@ public class SubjectCreateExecuteAction extends Action {
 			return;
 		}
 
+		// 科目コードの重複をチェック
+        SubjectDao subjectDao = new SubjectDao();
+        boolean cdExists = subjectDao.exists(cd, teacher.getSchool());
+
+        if (cdExists) {
+            // 重複がある場合はエラーメッセージを設定して科目登録ページにフォワード
+            request.setAttribute("errorMessage", "科目コードが重複しています");
+            request.getRequestDispatcher("subject_create.jsp").forward(request, response);
+            return;
+        }
+
 		// 科目情報を作成してデータベースに保存
 		Subject subject = new Subject();
 		subject.setCd(cd);
 		subject.setName(name);
 		subject.setSchool(teacher.getSchool());
 
-		SubjectDao subjectDao = new SubjectDao();
 		subjectDao.save(subject, teacher.getSchool());
 
 		// 科目登録完了ページにリダイレクト
