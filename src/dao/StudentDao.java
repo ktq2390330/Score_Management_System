@@ -10,7 +10,7 @@ import java.util.List;
 import bean.School;
 import bean.Student;
 public class StudentDao extends Dao {
-	private String baseSql = "select * from student where school_cd=?";
+	private String baseSql = "select * from student where school_cd=? and deleted=false ";
 //	select * from student where school_cd=? and deleted=false
 	public Student get(String no) throws Exception {
 	    Student student = new Student();
