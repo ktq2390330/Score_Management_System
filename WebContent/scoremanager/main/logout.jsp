@@ -11,7 +11,7 @@
 			</h2>
 			<p class="h2 fw-normal bg-opacity-10 py-2 px-4 mb-0"
 				style="text-align: center; background-color: lightgreen; font-size: small;">ログアウトしました</p>
-			<br> <a href="/Score_Management/scoremanager/Login.action">ログイン</a>
+			<br> <a href="../Login.action">ログイン</a>
 		</section>
 	</c:param>
 </c:import>
