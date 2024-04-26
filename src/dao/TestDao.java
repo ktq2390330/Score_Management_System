@@ -23,7 +23,7 @@ public class TestDao extends Dao{
 
 
 	    try {
-	        statement = connection.prepareStatement(baseSql+"student_no=? and subject_no and school_cd=? and no=?");
+	        statement = connection.prepareStatement(baseSql+" student_no=? and subject_cd=? and school_cd=? and no=? ");
 	        statement.setString(1, student.getNo());
 	        statement.setString(2, subject.getCd());
 	        statement.setString(3, school.getCd());
@@ -67,19 +67,21 @@ public class TestDao extends Dao{
 	    return test;
 	}
 
-	private Test postFilter(ResultSet rSet, School school) throws Exception {
-        Test test = new Test();
-	    StudentDao studentDao=new StudentDao();
-	    SubjectDao subjectDao=new SubjectDao();
+	private Test postFilter(ResultSet rSet,int entYear, School school) throws Exception {
+	    Test test = null;
+	    StudentDao studentDao = new StudentDao();
+	    SubjectDao subjectDao = new SubjectDao();
 	    try {
+	        if (rSet.next()) { // ResultSetが空でないことを確認する
+	            test = new Test();
 	            test.setNo(rSet.getInt("no"));
 	            test.setClassNum(rSet.getString("class_num"));
 	            test.setPoint(rSet.getInt("point"));
 	            test.setSchool(school);
 	            test.setStudent(studentDao.get(rSet.getString("student_no")));
-	            test.setSchool(school);
-	            test.setSubject(subjectDao.get(rSet.getString("subject_no"), school));
-	    } catch (SQLException | NullPointerException e) {
+	            test.setSubject(subjectDao.get(rSet.getString("subject_cd"), school));
+	        }
+	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        // エラーログの出力を行う場合、適切に処理を行います
 	    } finally {
@@ -87,7 +89,8 @@ public class TestDao extends Dao{
 	            try {
 	                rSet.close();
 	            } catch (SQLException sqle) {
-	                throw sqle;
+	                sqle.printStackTrace();
+	                // エラーログの出力を行う場合、適切に処理を行います
 	            }
 	        }
 	    }
@@ -106,14 +109,14 @@ public class TestDao extends Dao{
 	    try {
 	    	slist=stDao.filter(school, entYear, classNum, true);
 	    	for(Student st:slist){
-	    		statement=connection.prepareStatement(baseSql+"student_no=? subject_cd=? and school_cd=? and no=? and class_num=?");
+	    		statement=connection.prepareStatement(baseSql+" student_no=? and subject_cd=? and school_cd=? and no=? and class_num=? ");
 	    		statement.setString(1, st.getNo());
 		        statement.setString(2, subject.getCd());
 		        statement.setString(3, school.getCd());
 		        statement.setString(4, ""+num);
 		        statement.setString(5, classNum);
 		        rSet=statement.executeQuery();
-		        Test result=postFilter(rSet,school);
+		        Test result=postFilter(rSet, entYear, school);
 		        list.add(result);
 	    	}
 	    } catch (Exception e) {
@@ -154,7 +157,7 @@ public class TestDao extends Dao{
 	    		Test old = get(t.getStudent(),t.getSubject(),t.getSchool(),t.getNo());
 	    		if (old == null) {
 	    			statement = connection.prepareStatement(
-	    					"insert into test(student_no, subject_no, school_cd, no, point, class) values (?, ?, ?, ?, ?, ?)");
+	    					"insert into test(student_no, subject_cd, school_cd, no, point, class_num) values (?, ?, ?, ?, ?, ?)");
 	    			statement.setString(1,  t.getStudent().getNo());
 	    			statement.setString(2, t.getSubject().getCd());
 	    			statement.setString(3,  t.getSchool().getCd());
@@ -163,7 +166,7 @@ public class TestDao extends Dao{
 	    			statement.setString(6, t.getClassNum());
 	    		} else {
 	    			statement = connection.prepareStatement(
-	    					"update test set point=? class_num=? where student_no=? and subject_cd=?");
+	    					"update test set point=? where class_num=? and student_no=? and subject_cd=?");
 	    			statement.setInt(1,  t.getPoint());
 	    			statement.setString(2,  t.getClassNum());
 	    			statement.setString(3,  t.getStudent().getNo());

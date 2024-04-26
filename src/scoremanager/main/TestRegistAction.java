@@ -12,7 +12,6 @@ import bean.Subject;
 import bean.Teacher;
 import bean.Test;
 import dao.ClassNumDao;
-import dao.StudentDao;
 import dao.SubjectDao;
 import dao.TestDao;
 import tool.Action;
@@ -25,7 +24,6 @@ public class TestRegistAction extends Action {
         String entYearStr = request.getParameter("f1");
         String classNum = request.getParameter("f2");
         String subjectStr = request.getParameter("f3");
-        System.out.println(subjectStr);
         String numStr = request.getParameter("f4");
         int entYear = 0;
         int num = 0;
@@ -39,10 +37,8 @@ public class TestRegistAction extends Action {
         if (subjectStr != null) {
         	subject.setCd(subjectStr);
         }
-        System.out.println(subject);
         SubjectDao subjectDao = new SubjectDao();
         TestDao testDao = new TestDao();
-        StudentDao studentDao = new StudentDao();
         ClassNumDao cNumDao = new ClassNumDao();
         List<Test> tests = null;
         List<String> classNumSet = cNumDao.filter(teacher.getSchool());

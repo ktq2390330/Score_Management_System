@@ -52,8 +52,8 @@
             </form>
 
             <c:if test="${not empty tests}">
-                <div>科目:${f3}(${f4}回)</div>
-                <form action="TestRegist.action" method="post">
+                <div>科目:${subject_Name}(${f4}回)</div>
+                <form action="TestRegistExecute.action" method="post">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -67,10 +67,10 @@
                         <tbody>
                             <c:forEach var="test" items="${tests}">
                                 <tr>
-                                    <td>${test.student.entYear}<input type="hidden" name="student.entYear" value="${test.student.entYear}"></td>
+                                    <td>${test.student.entYear}</td>
                                     <td>${test.classNum}<input type="hidden" name="classNum" value="${test.classNum}"></td>
                                     <td>${test.student.no}<input type="hidden" name="student.no" value="${test.student.no}"></td>
-                                    <td>${test.student.name}<input type="hidden" name="student.name" value="${test.student.name}"></td>
+                                    <td>${test.student.name}<input type="hidden" name="subject.cd" value="${test.subject.cd}"></td>
                                     <td><input type="text" name="point" value="${test.point}"></td>
                                 </tr>
                             </c:forEach>
