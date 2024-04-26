@@ -10,9 +10,9 @@
                 <p class="text-orange">${errorMessage}</p>
             </c:if>
             <br>
-			<p class="h2 fw-normal bg-opacity-10 py-2 px-4 mb-0"
+			<p class="h2 fw-normal bg-opacity-10 py-2 mb-0"
 				style="text-align: left; font-size: small;">「${subject.name}(${subject.cd})」を削除してもよろしいですか</p>
-			<br>
+
 			<!-- 削除ボタン -->
 			<a href="SubjectDeleteExecute.action?cd=${subject.cd}" style="color: white; background-color: red; padding: 8px 16px; border-radius: 4px; text-decoration: none;">削除</a>
 			<br><br><br><br>
