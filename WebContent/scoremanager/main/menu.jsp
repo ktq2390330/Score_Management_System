@@ -20,13 +20,13 @@
 				<div
 					class="col d-flex flex-column align-items-center justify-content-center mx-2 rounded shadow"
 					style="height: 10rem; background-color: #CCFFCC;">
-					<b>成績管理</b> <a href="#"><b>成績登録</b></a> <a href="Subject_List.action"><b>成績参照</b></a>
+					<b>成績管理</b> <a href="#"><b>成績登録</b></a> <a href="#"><b>成績参照</b></a>
 				</div>
 
 				<div
 					class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
 					style="height: 10rem; background-color: #CCCCFF;">
-					<a href="#"><b>科目管理</b></a>
+					<a href="SubjectList.action"><b>科目管理</b></a>
 				</div>
 			</div>
 		</section>
