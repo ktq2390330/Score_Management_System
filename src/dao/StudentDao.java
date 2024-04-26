@@ -292,7 +292,7 @@ public class StudentDao extends Dao {
         int count=0;
 
         try {
-            statement=connection.prepareStatement("update student set deleted=true where student_no=?");
+            statement=connection.prepareStatement("update student set deleted=true where no =?");
             statement.setString(1, studentNo);
 
             count=statement.executeUpdate();
