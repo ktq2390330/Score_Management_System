@@ -188,11 +188,12 @@ public class TestDao extends Dao{
 			statement.setString(6, test.getClassNum());
 		} else {
 			statement = connection.prepareStatement(
-					"update test set point=? where class_num=? and student_no=? and subject_cd=?");
+					"update test set point=? where class_num=? and student_no=? and subject_cd=? and no = ?");
 			statement.setInt(1,  test.getPoint());
 			statement.setString(2,  test.getClassNum());
 			statement.setString(3,  test.getStudent().getNo());
 			statement.setString(4, test.getSubject().getCd());
+			statement.setInt(5, test.getNo());
 		}
 		statement.executeUpdate();
 		}catch(Exception e){
