@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.Map" %>
 <%@ page import="java.util.ArrayList" %>
 <%
 HashSet<String> displayedStudents = new HashSet<String>();
@@ -58,35 +59,72 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
                 </div>
             </form>
 
-            <c:if test="${not empty tests}">
-                <div>科目:${subject_name2}(${f4}回)</div>
-                <form action="TestRegistExecute.action" method="post" onsubmit="return validateForm()">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>入学年度</th>
-                                <th>クラス</th>
-                                <th>学生番号</th>
-                                <th>氏名</th>
-                                <th>点数</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="test" items="${tests}">
-                                <tr>
-                                    <td>${test.student.entYear}<input type="hidden" name="no" value="${test.no}"></td>
-                                    <td>${test.classNum}<input type="hidden" name="classNum" value="${test.classNum}"></td>
-                                    <td>${test.student.no}<input type="hidden" name="student.no" value="${test.student.no}"></td>
-                                    <td>${test.student.name}<input type="hidden" name="subject.cd" value="${test.subject.cd}"></td>
-                                    <td><input type="text" class="point" name="point" value="${test.point}">
-                                    <div class="errorMessage2" style="color: orange;"></div></td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                    <input type="submit" value="登録して終了" id="submit-button">
-                </form>
-            </c:if>
+            <c:if test="${not empty students}">
+    			<div>科目:${subject_name2}(${f4}回)</div>
+    			<form action="TestRegistExecute.action" method="post" onsubmit="return validateForm()" id="form">
+        			<table class="table table-hover">
+            			<thead>
+                			<tr>
+                    			<th>入学年度</th>
+                    			<th>クラス</th>
+                    			<th>学生番号</th>
+                    			<th>氏名</th>
+                    			<th>点数</th>
+                    			<th>削除</th>
+                			</tr>
+            			</thead>
+            			<tbody>
+                			<!-- 生徒をループ -->
+               				<c:forEach var="student" items="${students}" varStatus="loop">
+    							<tr>
+        							<td>${student.entYear}<input type="hidden" name="no" value="${f4}"></td>
+        							<td>${student.classNum}<input type="hidden" name="classNum" value="${student.classNum}"></td>
+        							<td>${student.no}<input type="hidden" name="student.no" value="${student.no}"></td>
+        							<td>${student.name}<input type="hidden" name="subject.cd" value="${f3}"></td>
+        							<td>
+        						   		<c:set var="testExists" value="false" />
+        						    	<c:forEach var="test" items="${tests}">
+            							    <c:if test="${test.student.no eq student.no}">
+                						    	<input type="text" class="point" name="point" value="${test.point}">
+                					    		<div class="errorMessage2" style="color: orange;"></div>
+                					    		<c:set var="testExists" value="true" />
+                							</c:if>
+            							</c:forEach>
+            							<c:if test="${not testExists}">
+                							<input type="text" class="point" name="point" value="">
+                							<div class="errorMessage2" style="color: orange;"></div>
+                							<input type="hidden" name="deleteTest_${loop.index}" value="false">
+            							</c:if>
+        							</td>
+        							<td>
+        							    <c:choose>
+            							    <c:when test="${not empty tests}">
+                							    <c:forEach var="test" items="${tests}">
+                    							    <c:if test="${test.student.no eq student.no}">
+                    							        &nbsp;&nbsp;<input type="checkbox" name="deleteTest" value="${test.student.no}">
+                    							    </c:if>
+                    							</c:forEach>
+                							</c:when>
+                							<c:otherwise>
+                					    		<input type="hidden" name="deleteTest_${loop.index}" value="false"> >
+                							</c:otherwise>
+            							</c:choose>
+        							</td>
+    							</tr>
+							</c:forEach>
+			            </tbody>
+				    </table>
+        			<input type="hidden" name="no2" value="${f4}">
+        			<input type="hidden" name="subject.cd2" value="${f3}">
+        			<input type="submit" value="登録して終了" name="submitButton" id="submit-button" onclick="return addHiddenField()">
+    				<input type="submit" value="登録して再度入力" name="submitButton" id="submit-again-button">
+    			</form>
+			</c:if>
+			<c:if test="${not empty take}">
+				<c:if test="${empty students}">
+					<div>学生情報が存在しませんでした</div>
+				</c:if>
+			</c:if>
         </section>
     </c:param>
 </c:import>
@@ -127,6 +165,14 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
 <script>
     document.getElementById("submit-button").addEventListener("click", function(event) {
         if (!validatePoints()) {
+            event.preventDefault();
+            displayPointErrorMessage("点数は0~100の範囲で入力してください");
+        } else {
+            clearPointErrorMessage();
+        }
+    });
+    document.getElementById("submit-again-button").addEventListener("click", function(event) {
+    	if (!validatePoints()) {
             event.preventDefault();
             displayPointErrorMessage("点数は0~100の範囲で入力してください");
         } else {

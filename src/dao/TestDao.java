@@ -97,7 +97,6 @@ public class TestDao extends Dao{
 	    return test;
 	}
 
-
 	public List<Test> filter(int entYear, String classNum,Subject subject,int num,School school) throws Exception {
 	    List<Test> list = new ArrayList<>();
 	    List<Student> slist=new ArrayList<>();
@@ -234,14 +233,15 @@ public class TestDao extends Dao{
         return count == list.size();
     }
 
-    public boolean delete(Test test,Connection connection)throws Exception{
+    public boolean delete(Test test, Connection connection)throws Exception{
     	boolean flg=false;
     	PreparedStatement statement = null;
     	int count = 0;
     	try{
-    	statement = connection.prepareStatement("delete from test where student_no=? and subject_no=?");
+    	statement = connection.prepareStatement("delete from test where student_no=? and subject_cd=? and no=?");
         statement.setString(1, test.getStudent().getNo());
         statement.setString(2, test.getSubject().getCd());
+        statement.setInt(3, test.getNo());
         count=statement.executeUpdate();
     	}catch(Exception e){
     		throw e;

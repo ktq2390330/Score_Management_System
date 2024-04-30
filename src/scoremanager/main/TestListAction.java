@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.School;
+import bean.Student;
 import bean.Subject;
 import bean.Teacher;
 import bean.Test;
 import dao.ClassNumDao;
+import dao.StudentDao;
 import dao.SubjectDao;
 import dao.TestDao;
 import tool.Action;
@@ -30,10 +32,12 @@ public class TestListAction extends Action {
 		String subjectStr = request.getParameter("f3");
 		String studentNum = request.getParameter("f4");
 		int entYear = 0;
-		int num = 0;
+
 		String subjectName = null;
 		String take = null;
 		Subject subject = new Subject();
+		StudentDao studentDao = new StudentDao();
+		List<Student> students = new ArrayList<>();
 		if (studentNum == null) {
 			if (entYearStr != null && !entYearStr.isEmpty()) {
 				entYear = Integer.parseInt(entYearStr);
@@ -43,37 +47,28 @@ public class TestListAction extends Action {
 			if (subjectStr != null) {
 				subject.setCd(subjectStr);
 				subjectName = new SubjectDao().get(subject.getCd(), school).getName();
+				boolean isAttend = false;
+				students = studentDao.filter(teacher.getSchool(),entYear,classNum, isAttend);
 			}
 
 			SubjectDao subjectDao = new SubjectDao();
 			TestDao testDao = new TestDao();
 			ClassNumDao cNumDao = new ClassNumDao();
-			List<Test> tests1 = null;
-			List<Test> tests2 = null;
 			List<Test> tests = new ArrayList<>();
 			List<String> classNumSet = cNumDao.filter(teacher.getSchool());
 			List<Subject> subjectSet = subjectDao.filter(teacher.getSchool());
 			List<String> subject_cdSet = getSubjectCdList(subjectSet);
 			List<String> subject_nameSet = getSubjectNameList(subjectSet);
 			if (entYear != 0 && !classNum.equals("0")) {
-				num = 1;
-				tests1 = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
-				if (tests1 != null && !tests1.isEmpty()) {
-					for (Test test : tests1) {
-						if (test != null) {
-							tests.add(test);
-						}
-					}
-				}
-
-				num = 2;
-				tests2 = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
-				if (tests2 != null && !tests2.isEmpty()) {
-					for (Test test : tests2) {
-						if (test != null) {
-							tests.add(test);
-						}
-					}
+				for (int num = 1; num <= 10; num++) {
+				    List<Test> testsForNum = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
+				    if (testsForNum != null && !testsForNum.isEmpty()) {
+				        for (Test test : testsForNum) {
+				            if (test != null) {
+				                tests.add(test);
+				            }
+				        }
+				    }
 				}
 			}
 
@@ -88,6 +83,7 @@ public class TestListAction extends Action {
 			request.setAttribute("f2", classNum);
 			request.setAttribute("f3", subjectStr);
 			request.setAttribute("tests", tests);
+			request.setAttribute("students",students);
 			request.setAttribute("class_num_set", classNumSet);
 			request.setAttribute("ent_year_set", entYearSet);
 			request.setAttribute("subject_cdset", subject_cdSet);

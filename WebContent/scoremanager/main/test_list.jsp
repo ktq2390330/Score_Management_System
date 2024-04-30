@@ -84,23 +84,23 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="test" items="${tests}">
-                                <c:if test="${not displayedStudents.contains(test.student.no)}">
+                        	<c:forEach var="student" items="${students}">
+                            	<c:if test="${not displayedStudents.contains(student.no)}">
                                     <tr>
-                                        <td>${test.student.entYear}</td>
-                                        <td>${test.classNum}</td>
-                                        <td>${test.student.no}</td>
-                                        <td>${test.student.name}</td>
-                                        <c:set var="testPoint1" value="-" />
+                                        <td>${student.entYear}</td>
+                                        <td>${student.classNum}</td>
+                                        <td>${student.no}</td>
+                                        <td>${student.name}</td>
+                                       	<c:set var="testPoint1" value="-" />
                                         <c:set var="testPoint2" value="-" />
-                                        <c:forEach var="t" items="${tests}">
-                                            <c:if test="${t.student.no eq test.student.no}">
+                                        <c:forEach var="test" items="${tests}">
+                                            <c:if test="${test.student.no eq student.no}">
                                                 <c:choose>
-                                                    <c:when test="${t.no eq 1}">
-                                                        <c:set var="testPoint1" value="${t.point}" />
+                                                    <c:when test="${test.no eq 1}">
+                                                        <c:set var="testPoint1" value="${test.point}" />
                                                     </c:when>
-                                                    <c:when test="${t.no eq 2}">
-                                                        <c:set var="testPoint2" value="${t.point}" />
+                                                    <c:when test="${test.no eq 2}">
+                                                        <c:set var="testPoint2" value="${test.point}" />
                                                     </c:when>
                                                 </c:choose>
                                             </c:if>

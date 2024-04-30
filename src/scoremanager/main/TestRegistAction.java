@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.School;
+import bean.Student;
 import bean.Subject;
 import bean.Teacher;
 import bean.Test;
 import dao.ClassNumDao;
+import dao.StudentDao;
 import dao.SubjectDao;
 import dao.TestDao;
 import tool.Action;
@@ -29,12 +31,14 @@ public class TestRegistAction extends Action {
 		String classNum = request.getParameter("f2");
 		String subjectStr = request.getParameter("f3");
 		String numStr = request.getParameter("f4");
+		String take = null;
 		int entYear = 0;
 		int num = 0;
 		String subjectName = null;
 		Subject subject = new Subject();
 		if (entYearStr != null && !entYearStr.isEmpty()) {
 			entYear = Integer.parseInt(entYearStr);
+			take = "taking";
 		}
 		if (numStr != null) {
 			num = Integer.parseInt(numStr);
@@ -47,7 +51,11 @@ public class TestRegistAction extends Action {
 		SubjectDao subjectDao = new SubjectDao();
 		TestDao testDao = new TestDao();
 		ClassNumDao cNumDao = new ClassNumDao();
+		boolean isAttend = true;
+		List<Student> students;
 		List<Test> tests = null;
+		StudentDao studentDao = new StudentDao();
+		students = studentDao.filter(teacher.getSchool(),entYear,classNum, isAttend);
 		List<String> classNumSet = cNumDao.filter(teacher.getSchool());
 		List<Subject> subjectSet = subjectDao.filter(teacher.getSchool());
 		List<String> subject_cdSet = getSubjectCdList(subjectSet);
@@ -67,12 +75,14 @@ public class TestRegistAction extends Action {
 		request.setAttribute("f2", classNum);
 		request.setAttribute("f3", subjectStr);
 		request.setAttribute("f4", num);
+		request.setAttribute("students",students);
 		request.setAttribute("tests", tests);
 		request.setAttribute("class_num_set", classNumSet);
 		request.setAttribute("ent_year_set", entYearSet);
 		request.setAttribute("subject_cdset", subject_cdSet);
 		request.setAttribute("subject_nameset", subject_nameSet);
 		request.setAttribute("subject_name2", subjectName);
+		request.setAttribute("take", take);
 
 		request.getRequestDispatcher("test_regist.jsp").forward(request, response);
 	}
