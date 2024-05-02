@@ -108,7 +108,7 @@ public class TestDao extends Dao{
 	    try {
 	    	slist=stDao.filter(school, entYear, classNum, true);
 	    	for(Student st:slist){
-	    		statement=connection.prepareStatement(baseSql+" student_no=? and subject_cd=? and school_cd=? and no=? and class_num=? order by student_no asc,subject_cd asc");
+	    		statement=connection.prepareStatement(baseSql+" student_no=? and subject_cd=? and school_cd=? and no=? and class_num=? order by class_num asc,student_no asc,subject_cd asc");
 	    		statement.setString(1, st.getNo());
 		        statement.setString(2, subject.getCd());
 		        statement.setString(3, school.getCd());
