@@ -51,8 +51,9 @@ public class TestListStudentExecuteAction extends Action {
 			List<Test> tests = null;
 			List<Test> testsAll = new ArrayList<>();
 			Subject subject = new Subject();
-			for (int num = 1; num <= 10; num++) {
-				for (String subject_cd : subject_cdSet) {
+			for (String subject_cd : subject_cdSet) {
+				for (int num = 1; num <= 10; num++) {
+
 					subject.setCd(subject_cd);
 					tests = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
 					if (tests != null && !tests.isEmpty()) {
@@ -62,6 +63,7 @@ public class TestListStudentExecuteAction extends Action {
 							}
 						}
 					}
+
 				}
 			}
 

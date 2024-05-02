@@ -47,7 +47,7 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
                         <label class="form-label" for="student-f4-select">回数</label>
                         <select class="form-select" id="student-f4-select" name="f4">
                             <option value="0">--------</option>
-                            <c:forEach var="num" begin="1" end="10">
+                            <c:forEach var="num" begin="1" end="2">
                                 <option value="${num}" <c:if test="${num==f4}">selected</c:if>>${num}</option>
                             </c:forEach>
                         </select>

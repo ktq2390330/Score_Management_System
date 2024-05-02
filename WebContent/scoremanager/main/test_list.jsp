@@ -75,12 +75,12 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>入学年度</th>
-                                <th>クラス</th>
-                                <th>学生番号</th>
-                                <th>氏名</th>
-                                <th>1回</th>
-                                <th>2回</th>
+                                <th style="width: 20%;">入学年度</th>
+                                <th style="width: 20%;">クラス</th>
+                                <th style="width: 20%;">学生番号</th>
+                                <th style="width: 20%;">氏名</th>
+                                <th style="width: 10%;">1回</th>
+                                <th style="width: 10%;">2回</th>
                             </tr>
                         </thead>
                         <tbody>
