@@ -46,7 +46,7 @@
 				<div class="mb-3">
 					<label class="form-label" for="password">パスワード</label> <input
 						type="password" class="form-control" id="password" name="password"
-						required value="20文字以内の半角英数字でご入力ください"/>
+						required value="20文字以内の半角英数字でご入力ください。"/>
 				</div>
 				<div class="mb-3 form-check text-center">
 					<label class="form-check-label" for="show-password">パスワードを表示
