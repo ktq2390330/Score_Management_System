@@ -41,12 +41,12 @@
 			<form method="post" action="LoginExecute.action">
 				<div class="mb-3">
 					<label class="form-label" for="username">ID</label>
-						<input type="text" class="form-control" id="id" name="id" required value="半角の初期値を入力してください" />
+						<input type="text" class="form-control" id="id" name="id" required placeholder="半角の初期値を入力してください" />
 										</div>
 				<div class="mb-3">
 					<label class="form-label" for="password">パスワード</label> <input
 						type="password" class="form-control" id="password" name="password"
-						required value="20文字以内の半角英数字でご入力ください。"/>
+						required placeholder="20文字以内の半角英数字でご入力ください。"/>
 				</div>
 				<div class="mb-3 form-check text-center">
 					<label class="form-check-label" for="show-password">パスワードを表示
