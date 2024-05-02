@@ -91,16 +91,16 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
                                         <td>${student.classNum}</td>
                                         <td>${student.no}</td>
                                         <td>${student.name}</td>
-                                       	<c:set var="testPoint1" value="-" />
-                                        <c:set var="testPoint2" value="-" />
+                                       	<c:set var="testPoint1" value="&nbsp;&nbsp;-" />
+                                        <c:set var="testPoint2" value="&nbsp;&nbsp;-" />
                                         <c:forEach var="test" items="${tests}">
                                             <c:if test="${test.student.no eq student.no}">
                                                 <c:choose>
                                                     <c:when test="${test.no eq 1}">
-                                                        <c:set var="testPoint1" value="${test.point}" />
+                                                        <c:set var="testPoint1" value="&nbsp;${test.point}" />
                                                     </c:when>
                                                     <c:when test="${test.no eq 2}">
-                                                        <c:set var="testPoint2" value="${test.point}" />
+                                                        <c:set var="testPoint2" value="&nbsp;${test.point}" />
                                                     </c:when>
                                                 </c:choose>
                                             </c:if>
