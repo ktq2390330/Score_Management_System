@@ -68,10 +68,10 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
         			<table class="table table-hover">
         			    <thead>
         			        <tr>
-        			            <th style="width: 40%;">科目名</th>
+        			            <th style="width: 50%;">科目名</th>
         			            <th style="width: 20%;">科目コード</th>
         			            <th style="width: 20%;">回数</th>
-        			            <th style="width: 20%;">点数</th>
+        			            <th style="width: 10%;">点数</th>
         			        </tr>
         			    </thead>
         			    <tbody>
