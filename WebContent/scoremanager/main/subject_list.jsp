@@ -12,12 +12,13 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>科目コード</th>
-						<th>科目名</th>
-						<th></th>
+						<th style="width: 20%;">科目コード</th>
+						<th style="width: 40%;">科目名</th>
+						<th style="width: 20%; text-align: right;"></th>
 						<!-- 変更と削除のための空の列を追加 -->
-						<th></th>
+						<th style="width: 20%; text-align: right;"></th>
 						<!-- 変更と削除のための空の列を追加 -->
+
 					</tr>
 				</thead>
 				<tbody>
@@ -26,9 +27,11 @@
 							<c:forEach var="subject" items="${subjects}">
 								<tr>
 									<td><c:if test="${not empty subject.cd}">${subject.cd}</c:if></td>
-									<td><c:if test="${not empty subject.name}">${subject.name}</c:if></td>
-									<td><a href="SubjectUpdate.action?cd=${subject.cd}">変更</a></td>
-									<td><a href="SubjectDelete.action?cd=${subject.cd}">削除</a></td>
+									<td style="white-space: nowrap;"><c:if test="${not empty subject.name}">${subject.name}</c:if></td>
+									<td style="text-align: right;"><a
+										href="SubjectUpdate.action?cd=${subject.cd}">変更</a></td>
+									<td style="text-align: right; padding-right: 70px;"><a
+										href="SubjectDelete.action?cd=${subject.cd}">削除</a></td>
 								</tr>
 							</c:forEach>
 						</c:when>
