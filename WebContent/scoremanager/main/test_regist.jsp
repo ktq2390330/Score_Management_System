@@ -15,7 +15,7 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
             <h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-2 px-4 mb-0">成績管理</h2><br>
             <form method="get" id="search-form">
                 <div class="row border mx-3 mb-3 py-2 align-items-center rounded" id="filter">
-                    <div class="col-2">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6">
                         <label class="form-label" for="student-f1-select">入学年度</label>
                         <select class="form-select" id="student-f1-select" name="f1">
                             <option value="0">--------</option>
@@ -24,7 +24,7 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
                             </c:forEach>
                         </select>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6">
                         <label class="form-label" for="student-f2-select">クラス</label>
                         <select class="form-select" id="student-f2-select" name="f2">
                             <option value="0">--------</option>
@@ -33,7 +33,7 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
                             </c:forEach>
                         </select>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
     					<label class="form-label" for="student-f3-select">科目</label>
     						<select class="form-select" id="student-f3-select" name="f3">
         					<option value="0">--------</option>
@@ -43,7 +43,7 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
     					</select>
 					</div>
 
-                    <div class="col-2">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6">
                         <label class="form-label" for="student-f4-select">回数</label>
                         <select class="form-select" id="student-f4-select" name="f4">
                             <option value="0">--------</option>
@@ -52,7 +52,7 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
                             </c:forEach>
                         </select>
                     </div>
-                    <div class="col-2 text-center">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6 text-center">
                         <button class="btn btn-secondary" type="submit">検索</button>
                     </div>
                     <div id="error-message-container"></div>
@@ -85,13 +85,13 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
         						   		<c:set var="testExists" value="false" />
         						    	<c:forEach var="test" items="${tests}">
             							    <c:if test="${test.student.no eq student.no}">
-            							    <input type="number" class="point" name="point" value="${test.point}" min="0" max="100">
+            							    <input type="number" class="point form-control" name="point" value="${test.point}" min="0" max="100">
                 					    		<div class="errorMessage2" style="color: orange;"></div>
                 					    		<c:set var="testExists" value="true" />
                 							</c:if>
             							</c:forEach>
             							<c:if test="${not testExists}">
-                							<input type="number" class="point" name="point" value="" min="0" max="100">
+                							<input type="number" class="point form-control" name="point" value="" min="0" max="100">
                 							<div class="errorMessage2" style="color: orange;"></div>
                 							<input type="hidden" name="deleteTest_${loop.index}" value="false">
             							</c:if>
