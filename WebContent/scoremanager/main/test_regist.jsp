@@ -85,13 +85,13 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
         						   		<c:set var="testExists" value="false" />
         						    	<c:forEach var="test" items="${tests}">
             							    <c:if test="${test.student.no eq student.no}">
-                						    	<input type="text" class="point" name="point" value="${test.point}">
+            							    <input type="number" class="point" name="point" value="${test.point}" min="0" max="100">
                 					    		<div class="errorMessage2" style="color: orange;"></div>
                 					    		<c:set var="testExists" value="true" />
                 							</c:if>
             							</c:forEach>
             							<c:if test="${not testExists}">
-                							<input type="text" class="point" name="point" value="">
+                							<input type="number" class="point" name="point" value="" min="0" max="100">
                 							<div class="errorMessage2" style="color: orange;"></div>
                 							<input type="hidden" name="deleteTest_${loop.index}" value="false">
             							</c:if>
