@@ -12,8 +12,8 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th style="width: 30%;">科目コード</th>
-						<th style="width: 30%;">科目名</th>
+						<th style="width: 20%;">科目コード</th>
+						<th style="width: 40%;">科目名</th>
 						<th style="width: 20%; text-align: right;"></th>
 						<!-- 変更と削除のための空の列を追加 -->
 						<th style="width: 20%; text-align: right;"></th>
