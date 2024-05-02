@@ -31,6 +31,7 @@ public class TestListAction extends Action {
 		String classNum = request.getParameter("f2");
 		String subjectStr = request.getParameter("f3");
 		String studentNum = request.getParameter("f4");
+		String f = request.getParameter("f");
 		int entYear = 0;
 
 		String subjectName = null;
@@ -38,7 +39,7 @@ public class TestListAction extends Action {
 		Subject subject = new Subject();
 		StudentDao studentDao = new StudentDao();
 		List<Student> students = new ArrayList<>();
-		if (studentNum == null) {
+		if (f == null || "sj".equals(f)) {
 			if (entYearStr != null && !entYearStr.isEmpty()) {
 				entYear = Integer.parseInt(entYearStr);
 				take = "taking";
@@ -93,7 +94,7 @@ public class TestListAction extends Action {
 
 			request.getRequestDispatcher("test_list.jsp").forward(request, response);
 
-		}else{
+		}else if ("st".equals(f)) {
 			request.setAttribute("studentNum", studentNum);
 			request.getRequestDispatcher("TestListStudentExecute.action").forward(request, response);
 		}
