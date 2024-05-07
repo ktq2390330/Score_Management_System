@@ -42,6 +42,7 @@ public class TestListStudentExecuteAction extends Action {
 				entYearSet.add(i);
 			}
 
+			String take = (String) request.getAttribute("take");
 			String studentNum = (String) request.getAttribute("studentNum");
 			StudentDao studentDao = new StudentDao();
 			String studentName = studentDao.get(studentNum).getName();
@@ -67,6 +68,7 @@ public class TestListStudentExecuteAction extends Action {
 				}
 			}
 
+			request.setAttribute("take", take);
 			request.setAttribute("name", studentName);
 			request.setAttribute("num", studentNum);
 			request.setAttribute("tests", testsAll);

@@ -95,6 +95,8 @@ public class TestListAction extends Action {
 			request.getRequestDispatcher("test_list.jsp").forward(request, response);
 
 		}else if ("st".equals(f)) {
+			take = "taking";
+			request.setAttribute("take", take);
 			request.setAttribute("studentNum", studentNum);
 			request.getRequestDispatcher("TestListStudentExecute.action").forward(request, response);
 		}
