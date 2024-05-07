@@ -11,26 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class FrontContoroller
  */
-@WebServlet(urlPatterns ={"*.action"})
-public class FrontController extends HttpServlet {
-
+@WebServlet(urlPatterns={"*.action"})
+public class FrontController extends HttpServlet{
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		try {
-			String path = request.getServletPath().substring(1);
-			String name = path.replace(".a", "A").replace('/', '.');
+	protected void doGet(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+		try{
+			String path=request.getServletPath().substring(1);
+			String name=path.replace(".a", "A").replace('/', '.');
 
-			System.out.println("★ servlet path ->" + request.getServletPath());
-			System.out.println("★ class name ->" + name);
-			Action action = (Action) Class.forName(name).getDeclaredConstructor().newInstance();
-			action.execute(request, response);
-		} catch(Exception e) {
+			System.out.println("★ servlet path ->"+request.getServletPath());
+			System.out.println("★ class name ->"+name);
+			Action action=(Action) Class.forName(name).getDeclaredConstructor().newInstance();
+			action.execute(request,response);}
+		catch(Exception e){
 			e.printStackTrace();
-			request.getRequestDispatcher("/scoremanager/error.jsp").forward(request, response);
-		}
+			request.getRequestDispatcher("/scoremanager/error.jsp").forward(request,response);}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+		doGet(request,response);
 	}
 }
