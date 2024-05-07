@@ -243,3 +243,4 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
         return true;
     }
 </script>
+
