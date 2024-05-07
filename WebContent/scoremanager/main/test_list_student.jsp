@@ -17,7 +17,7 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
             </c:if>
             <c:if test="${not empty take}">
                 <h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-2 px-4 mb-1">
-                    <b>成績一覧(科目)</b>
+                    <b>成績一覧(学生)</b>
                 </h2>
             </c:if>
             <form method="get">
