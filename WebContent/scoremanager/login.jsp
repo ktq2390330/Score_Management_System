@@ -23,7 +23,7 @@
         </script>
 	</c:param>
 	<c:param name="content">
-		<div class="row border mx-3 py-2 align-items-center rounded"
+		<div class="row border mx-3 align-items-center"
 			id="fillter">
 			<h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-0 px-4 mb-3"
 				style="text-align: center;">
@@ -44,10 +44,11 @@
 						<input type="text" class="form-control" id="id" name="id" required placeholder="半角の初期値を入力してください" />
 										</div>
 				<div class="mb-3">
-					<label class="form-label" for="password">パスワード</label> <input
-						type="password" class="form-control" id="password" name="password"
-						required placeholder="20文字以内の半角英数字でご入力ください。"/>
-				</div>
+    <label class="form-label" for="password">パスワード</label>
+    <input type="password" class="form-control" id="password" name="password"
+           required placeholder="20文字以内の半角英数字でご入力ください。" maxlength="20"/>
+</div>
+
 				<div class="mb-3 form-check text-center">
 					<label class="form-check-label" for="show-password">パスワードを表示
 						<input class="form-check-input" type="checkbox" id="show-password" />
