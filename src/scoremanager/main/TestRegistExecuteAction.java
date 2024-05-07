@@ -93,11 +93,9 @@ public class TestRegistExecuteAction extends Action {
 		if (deletetests != null && !deletetests.isEmpty()) {
 		    testDao.delete(deletetests);
 		}
-
 		if (tests != null && !tests.isEmpty()) {
 			testDao.save(tests);
 		}
-
 
 		if (submitButtonValue != null) {
 		    if (submitButtonValue.equals("登録して終了")) {

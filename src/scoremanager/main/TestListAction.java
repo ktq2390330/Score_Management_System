@@ -79,7 +79,6 @@ public class TestListAction extends Action {
 				entYearSet.add(i);
 			}
 
-
 			request.setAttribute("f1", entYear);
 			request.setAttribute("f2", classNum);
 			request.setAttribute("f3", subjectStr);
@@ -117,6 +116,4 @@ public class TestListAction extends Action {
 		}
 		return subjectNameList;
 	}
-
-
 }

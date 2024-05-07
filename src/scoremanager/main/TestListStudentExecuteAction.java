@@ -64,7 +64,6 @@ public class TestListStudentExecuteAction extends Action {
 							}
 						}
 					}
-
 				}
 			}
 
@@ -128,6 +127,4 @@ public class TestListStudentExecuteAction extends Action {
 		}
 		return subjectNameList;
 	}
-
-
 }
