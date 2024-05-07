@@ -85,13 +85,13 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
         						   		<c:set var="testExists" value="false" />
         						    	<c:forEach var="test" items="${tests}">
             							    <c:if test="${test.student.no eq student.no}">
-            							    <input type="number" class="point form-control" name="point" value="${test.point}" min="0" max="100">
+            							    <input type="number" class="point form-control" name="point" value="${test.point}" min="0" max="100" onkeydown="return handleEnterKeyPress(event, this);">
                 					    		<div class="errorMessage2" style="color: orange;"></div>
                 					    		<c:set var="testExists" value="true" />
                 							</c:if>
             							</c:forEach>
             							<c:if test="${not testExists}">
-                							<input type="number" class="point form-control" name="point" value="" min="0" max="100">
+                							<input type="number" class="point form-control" name="point" value="" min="0" max="100" onkeydown="return handleEnterKeyPress(event, this);">
                 							<div class="errorMessage2" style="color: orange;"></div>
                 							<input type="hidden" name="deleteTest_${loop.index}" value="false">
             							</c:if>
@@ -208,5 +208,38 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
     function clearPointErrorMessage() {
         var errorMessageContainer = document.getElementById('point-error-message-container');
         errorMessageContainer.innerHTML = '';
+    }
+</script>
+
+<script type="text/javascript">
+    // Enterキーが押されたときの処理
+    function handleEnterKeyPress(event, currentTextBox) {
+        if (event.keyCode == 13) { // Enterキーが押された場合
+            var textBoxes = document.getElementsByName("point");
+            var currentIndex = Array.prototype.indexOf.call(textBoxes, currentTextBox); // 現在のテキストボックスのインデックスを取得
+            var nextIndex = currentIndex + 1;
+
+            if (nextIndex < textBoxes.length) {
+                textBoxes[nextIndex].focus(); // 次のテキストボックスにフォーカスを移す
+            } else {
+                // 最後のテキストボックスの場合、フォーカスを最初のテキストボックスに移す
+                textBoxes[0].focus();
+            }
+
+            // テキストボックスの値を反映する
+            var currentValue = parseInt(currentTextBox.value);
+            if (!isNaN(currentValue)) {
+                if (currentValue < 0) {
+                    currentTextBox.value = 0;
+                } else if (currentValue > 100) {
+                    currentTextBox.value = 100;
+                }
+            } else {
+                currentTextBox.value = ""; // 数値以外が入力された場合、空にする
+            }
+
+            return false;
+        }
+        return true;
     }
 </script>
