@@ -51,6 +51,7 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
                         </select>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    	<input type="hidden" name="f" value="sj">
                         <button class="btn btn-secondary" id="filter-button">検索</button>
                     </div>
                     <div id="error-message-container"></div>
@@ -64,6 +65,7 @@ pageContext.setAttribute("displayedStudents", displayedStudents);
                         <input class="form-control" type="text" id="student-f4-input" name="f4" placeholder="学生番号を入力してください" value="${f4}" required>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    	<input type="hidden" name="f" value="st">
                         <button class="btn btn-secondary" id="filter-button">検索</button>
                     </div>
                 </div>
