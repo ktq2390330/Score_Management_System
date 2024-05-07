@@ -6,6 +6,7 @@ public class Subject implements Serializable{
 	String cd;
 	String name;
 	School school;
+
 	public String getCd(){return cd;}
 	public void setCd(String cd){this.cd=cd;}
 
