@@ -61,7 +61,7 @@ public class TestListAction extends Action {
 			List<String> subject_cdSet = getSubjectCdList(subjectSet);
 			List<String> subject_nameSet = getSubjectNameList(subjectSet);
 			if (entYear != 0 && !classNum.equals("0")) {
-				for (int num = 1; num <= 10; num++) {
+				for (int num = 1; num <= 2; num++) {
 				    List<Test> testsForNum = testDao.filter(entYear, classNum, subject, num, teacher.getSchool());
 				    if (testsForNum != null && !testsForNum.isEmpty()) {
 				        for (Test test : testsForNum) {
