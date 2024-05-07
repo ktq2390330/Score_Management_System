@@ -19,7 +19,7 @@
 				</select>
 				<div id="entError"></div>
 				<br> <label for="no">学生番号</label> <input type="text"
-					class="form-control" id="no" name="no" placeholder="学生番号を入力してください" required>
+					class="form-control" id="no" name="no" placeholder="学生番号を入力してください" maxlength="10">
 				<div id="noError"></div>
 				<br>
 				<% if (request.getAttribute("errorMessage") != null) { %>
@@ -29,7 +29,7 @@
 				<% } %>
 
 				<label for="name">氏名</label> <input type="text" class="form-control"
-					id="name" name="name" placeholder="氏名を入力してください" required>
+					id="name" name="name" placeholder="氏名を入力してください" maxlength="10">
 				<div id="nameError"></div>
 				<br> <label for="classnum">クラス</label> <select
 					class="form-select" id="classnum" name="classnum">

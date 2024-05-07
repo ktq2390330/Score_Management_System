@@ -7,47 +7,56 @@
 	<c:param name="title" value="得点管理システム" />
 	<c:param name="scripts">
 		<script>
-            // パスワード表示のトグル機能
-            document.addEventListener('DOMContentLoaded', function() {
-                const showPasswordCheckbox = document.getElementById('show-password');
-                const passwordInput = document.getElementById('password');
+			// パスワード表示のトグル機能
+			document.addEventListener('DOMContentLoaded', function() {
+				const showPasswordCheckbox = document
+						.getElementById('show-password');
+				const passwordInput = document.getElementById('password');
 
-                showPasswordCheckbox.addEventListener('change', function() {
-                    if (showPasswordCheckbox.checked) {
-                        passwordInput.type = 'text';
-                    } else {
-                        passwordInput.type = 'password';
-                    }
-                });
-            });
-        </script>
+				showPasswordCheckbox.addEventListener('change', function() {
+					if (showPasswordCheckbox.checked) {
+						passwordInput.type = 'text';
+					} else {
+						passwordInput.type = 'password';
+					}
+				});
+			});
+		</script>
 	</c:param>
 	<c:param name="content">
-		<div class="row border mx-3 align-items-center"
-			id="fillter">
+		<div class="row border mx-3 align-items-center" id="fillter">
 			<h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-0 px-4 mb-3"
 				style="text-align: center;">
 				<b>ログイン</b>
 			</h2>
-			<% if (request.getAttribute("errors") != null) { %>
+			<%
+				if (request.getAttribute("errors") != null) {
+			%>
 			<ul style="text-align: center; list-style: none; padding-left: 0;">
-				<% for (String error : (List<String>) request.getAttribute("errors")) { %>
-				<li><%= error.substring(0) %></li>
-				<% } %>
+				<%
+					for (String error : (List<String>) request.getAttribute("errors")) {
+				%>
+				<li><%=error.substring(0)%></li>
+				<%
+					}
+				%>
 			</ul>
-			<% } %>
+			<%
+				}
+			%>
 
 
 			<form method="post" action="LoginExecute.action">
 				<div class="mb-3">
-					<label class="form-label" for="username">ID</label>
-						<input type="text" class="form-control" id="id" name="id" required placeholder="半角の初期値を入力してください" />
-										</div>
+					<label class="form-label" for="username">ID</label> <input
+						type="text" class="form-control" id="id" name="id" required
+						placeholder="半角の初期値を入力してください" />
+				</div>
 				<div class="mb-3">
-    <label class="form-label" for="password">パスワード</label>
-    <input type="password" class="form-control" id="password" name="password"
-           required placeholder="20文字以内の半角英数字でご入力ください。" maxlength="20"/>
-</div>
+					<label class="form-label" for="password">パスワード</label> <input
+						type="password" class="form-control" id="password" name="password"
+						required placeholder="20文字以内の半角英数字でご入力ください。" maxlength="20" />
+				</div>
 
 				<div class="mb-3 form-check text-center">
 					<label class="form-check-label" for="show-password">パスワードを表示
