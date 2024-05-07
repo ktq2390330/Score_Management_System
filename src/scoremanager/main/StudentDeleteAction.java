@@ -7,16 +7,15 @@ import bean.Student;
 import dao.StudentDao;
 import tool.Action;
 
-public class StudentDeleteAction extends Action {
+public class StudentDeleteAction extends Action{
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+    public void execute(HttpServletRequest request,HttpServletResponse response)throws Exception{
     	// 学生の学籍番号を取得
-        String no = request.getParameter("no");
+        String no=request.getParameter("no");
 
         // 学生の情報を取得
-        StudentDao studentDao = new StudentDao();
-        Student student = studentDao.get(no);
+        StudentDao studentDao=new StudentDao();
+        Student student=studentDao.get(no);
 
         // 学生情報をリクエストスコープに設定
         request.setAttribute("student", student);

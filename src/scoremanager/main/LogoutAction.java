@@ -7,12 +7,11 @@ import javax.servlet.http.HttpSession;
 import tool.Action;
 
 
-public class LogoutAction extends Action {
-
+public class LogoutAction extends Action{
 	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public void execute(HttpServletRequest req,HttpServletResponse res)throws Exception{
 		//ローカル変数の宣言 1
-		HttpSession session = req.getSession();//セッション
+		HttpSession session=req.getSession();//セッション
 
 		//リクエストパラメータ―の取得 2
 		//なし
