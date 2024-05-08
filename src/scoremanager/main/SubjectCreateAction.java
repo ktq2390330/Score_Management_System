@@ -5,10 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import tool.Action;
 
-public class SubjectCreateAction extends Action {
+public class SubjectCreateAction extends Action{
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+	public void execute(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		// JSP ページにフォワード
 		request.getRequestDispatcher("subject_create.jsp").forward(request, response);
 	}

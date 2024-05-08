@@ -9,41 +9,37 @@ import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
 
-public class SubjectCreateExecuteAction extends Action {
+public class SubjectCreateExecuteAction extends Action{
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void execute(HttpServletRequest request,HttpServletResponse response)throws Exception{
 		// セッションからユーザー情報を取得
-		HttpSession session = request.getSession();
-		Teacher teacher = (Teacher) session.getAttribute("user");
+		HttpSession session=request.getSession();
+		Teacher teacher=(Teacher)session.getAttribute("user");
 
 		// リクエストパラメータから科目情報を取得
-		String cd = request.getParameter("cd");
-		String name = request.getParameter("name");
+		String cd=request.getParameter("cd");
+		String name=request.getParameter("name");
 
 		// 文字数が3でない場合はエラーメッセージを設定して科目登録ページにフォワード
-		if (cd.length() != 3) {
-			request.setAttribute("errorMessage", "科目コードは3文字で入力してください");
-			request.setAttribute("cd", cd); // 入力された科目コードをリクエスト属性に設定
-	        request.setAttribute("name", name); // 入力された科目名をリクエスト属性に設定
-	        request.getRequestDispatcher("subject_create.jsp").forward(request, response);
-	        return;
-		}
+		if(cd.length()!= 3){
+			request.setAttribute("errorMessage","科目コードは3文字で入力してください");
+			request.setAttribute("cd",cd); // 入力された科目コードをリクエスト属性に設定
+	        request.setAttribute("name",name); // 入力された科目名をリクエスト属性に設定
+	        request.getRequestDispatcher("subject_create.jsp").forward(request,response);}
 
 		// 科目コードの重複をチェック
-        SubjectDao subjectDao = new SubjectDao();
-        boolean cdExists = subjectDao.exists(cd, teacher.getSchool());
+        SubjectDao subjectDao=new SubjectDao();
+        boolean cdExists=subjectDao.exists(cd, teacher.getSchool());
 
-        if (cdExists) {
+        if(cdExists){
             // 重複がある場合はエラーメッセージを設定して科目登録ページにフォワード
             request.setAttribute("errorMessage", "科目コードが重複しています");
             request.setAttribute("cd", cd); // 入力された科目コードをリクエスト属性に設定
             request.setAttribute("name", name); // 入力された科目名をリクエスト属性に設定
-            request.getRequestDispatcher("subject_create.jsp").forward(request, response);
-            return;
-        }
+            request.getRequestDispatcher("subject_create.jsp").forward(request, response);}
 
 		// 科目情報を作成してデータベースに保存
-		Subject subject = new Subject();
+		Subject subject=new Subject();
 		subject.setCd(cd);
 		subject.setName(name);
 		subject.setSchool(teacher.getSchool());

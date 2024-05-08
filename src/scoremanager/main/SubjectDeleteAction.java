@@ -9,20 +9,20 @@ import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
 
-public class SubjectDeleteAction extends Action {
+public class SubjectDeleteAction extends Action{
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void execute(HttpServletRequest request,HttpServletResponse response)throws Exception{
     	// セッションからユーザー情報を取得
-        HttpSession session = request.getSession();
-        Teacher teacher = (Teacher) session.getAttribute("user");
+        HttpSession session=request.getSession();
+        Teacher teacher=(Teacher)session.getAttribute("user");
 
     	// 科目コードを取得
-        String cd = request.getParameter("cd");
+        String cd=request.getParameter("cd");
 
         // 科目情報を取得してリクエストスコープに設定
-        SubjectDao subjectDao = new SubjectDao();
-        Subject subject = subjectDao.get(cd, teacher.getSchool());
-        request.setAttribute("subject", subject);
+        SubjectDao subjectDao=new SubjectDao();
+        Subject subject=subjectDao.get(cd, teacher.getSchool());
+        request.setAttribute("subject",subject);
 
         // 科目削除ページにフォワード
         request.getRequestDispatcher("subject_delete.jsp").forward(request, response);
